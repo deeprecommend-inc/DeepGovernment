@@ -1,0 +1,32 @@
+Django==3.2.8
+djangorestframework
+psycopg2
+uwsgi
+gunicorn
+django-cors-headers
+bcrypt
+django[argon2]
+djangorestframework_simplejwt
+djangorestframework-jwt
+pyjwt==1.7.1
+django-sslserver
+numpy
+stability-sdk
+ipython
+openai
+requests
+# sentence-transformers
+# httpx
+# tensorflow
+# h5py==3.7.0
+# Pillow==9.2.0
+# tqdm==4.64.1
+# ftfy==6.1.1
+# regex==2022.9.13
+# tensorflow-addons==0.17.1
+# pandas
+# scikit-learn
+# matplotlib
+# seaborn
+# python-dotenv
+# pyautogui

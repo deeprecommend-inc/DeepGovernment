@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  deepia-api:
+    build: ./src
+    container_name: deepia-api
+    command: bash -c "python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:9000"
+    volumes:
+      - ./src:/code
+    depends_on:
+      - deepia-db
+    ports:
+      - 9000:9000
+    links:
+      - deepia-db:deepia-db
+    networks:
+      - defaultnetwork
+  deepia-db:
+    image: postgres
+    container_name: deepia-db
+    ports:
+      - 5432:5432
+    volumes:
+      - db-store:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - defaultnetwork
+  deepia-web-server:
+    build: ./nginx/dev
+    container_name: deepia-web-server
+    ports:
+      - 80:80
+    volumes:
+      - ./data/logs/nginx/:/var/log/nginx/
+    depends_on:
+      - deepia-api
+    networks:
+      - defaultnetwork
+networks:
+  defaultnetwork:
+    driver: bridge
+volumes:
+  db-store:
